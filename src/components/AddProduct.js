@@ -53,7 +53,7 @@ const AddProduct = props => {
   }
 
   return (
-    <div className="section">
+    <div className="section add-product">
       <form onSubmit={addProduct}>
         <h1>Add Product</h1>
         <div className="field">

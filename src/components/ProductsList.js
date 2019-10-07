@@ -6,7 +6,7 @@ const ProductsList = props => {
   }
 
   return (
-    <div className="products-list">
+    <div className="section products-list">
       {props.products
         ? props.products.map((value, index) => (
             <div

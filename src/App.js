@@ -5,9 +5,11 @@ import './App.css'
 import AddProduct from './components/AddProduct'
 import ProductsList from './components/ProductsList'
 import SingleProduct from './components/SingleProduct'
+import Cart from './components/Cart'
 
 function App() {
   const [products, setProducts] = useState([])
+  const [cart, setCart] = useState([])
 
   const addProduct = product => {
     setProducts([...products, product])
@@ -21,6 +23,24 @@ function App() {
     setProducts(updatedProducts)
   }
 
+  const addToCart = ({ product, quantity }) => {
+    const index = cart.findIndex(itemInCart => itemInCart.product.slug === product.slug)
+
+    let newCart = []
+
+    if (index === -1) {
+      // not existing
+      newCart = [...cart, { product, quantity }]
+    } else {
+      quantity += cart[index].quantity
+      newCart = cart
+        .filter(item => item.product.slug !== product.slug)
+        .concat({ product, quantity })
+    }
+
+    setCart(newCart)
+  }
+
   return (
     <Router>
       <div id="app">
@@ -30,6 +50,7 @@ function App() {
         </aside>
 
         <main>
+          <Cart cart={cart} />
           <Route
             exact
             path="/"
@@ -44,7 +65,10 @@ function App() {
           <Route
             path="/product/:slug"
             render={({ match }) => (
-              <SingleProduct product={products.find(p => p.slug === match.params.slug)} />
+              <SingleProduct
+                product={products.find(p => p.slug === match.params.slug)}
+                addToCart={addToCart}
+              />
             )}
           />
         </main>
