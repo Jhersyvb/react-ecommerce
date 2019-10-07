@@ -1,3 +1,10 @@
+# Screenshots
+
+![](screenshots/products-list.png)
+![](screenshots/add-product.png)
+![](screenshots/single-product.png)
+![](screenshots/cart.png)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
