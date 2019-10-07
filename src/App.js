@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import './App.css'
 
@@ -11,8 +11,15 @@ function App() {
   const [products, setProducts] = useState([])
   const [cart, setCart] = useState([])
 
+  useEffect(() => {
+    setProducts(JSON.parse(localStorage.getItem('products')) || [])
+    setCart(JSON.parse(localStorage.getItem('cart')) || [])
+  }, [])
+
   const addProduct = product => {
-    setProducts([...products, product])
+    const updatedProducts = [...products, product]
+    setProducts(updatedProducts)
+    localStorage.setItem('products', JSON.stringify(updatedProducts))
   }
 
   const deleteProduct = index => {
@@ -21,6 +28,7 @@ function App() {
       .slice(0, index)
       .concat(updatedProducts.slice(index + 1, updatedProducts.length))
     setProducts(updatedProducts)
+    localStorage.setItem('products', JSON.stringify(updatedProducts))
   }
 
   const addToCart = ({ product, quantity }) => {
@@ -39,6 +47,7 @@ function App() {
     }
 
     setCart(newCart)
+    localStorage.setItem('cart', JSON.stringify(newCart))
   }
 
   return (

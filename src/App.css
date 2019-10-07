@@ -73,6 +73,7 @@ button {
 .products-list .box {
   background-color: lightsalmon;
   box-sizing: border-box;
+  margin-right: 1rem;
   padding: 1rem;
   width: 33%;
 }
@@ -92,7 +93,7 @@ button {
 }
 
 .single-product img {
-  width: 100%;
+  max-width: 100%;
 }
 
 .cart {
